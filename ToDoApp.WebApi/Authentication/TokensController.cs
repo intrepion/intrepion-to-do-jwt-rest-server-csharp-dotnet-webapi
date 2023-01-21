@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ToDoApp.WebApi.Authentication;
 
+[ApiController]
+[Route("[controller]")]
 public class TokensController : ControllerBase, ITokensController
 {
     private readonly SignInManager<UserEntity> _signInManager;
@@ -12,16 +14,8 @@ public class TokensController : ControllerBase, ITokensController
         _signInManager = signInManager;
     }
 
-    public async Task<IActionResult> AllAsync()
-    {
-        return Ok("");
-    }
-
-    public async Task<IActionResult> LoadAsync(string id)
-    {
-        return Ok("");
-    }
-
+    [HttpPost]
+    [Route("")]
     public async Task<IActionResult> MakeAsync([FromBody] TokenMakeRequest tokenMakeRequest)
     {
         if (tokenMakeRequest.UserName == null)
@@ -58,6 +52,8 @@ public class TokensController : ControllerBase, ITokensController
         return Ok("");
     }
 
+    [HttpDelete]
+    [Route("{id}")]
     public async Task<IActionResult> RemoveAsync(string id)
     {
         return Ok("");
